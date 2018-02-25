@@ -11,7 +11,7 @@
 # generated files
 bin/
 gen/
-runObserver/
+build/
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -28,8 +28,8 @@ local.properties
 .gradle
 /*/local.properties
 /*/out
-/*/*/runObserver
-runObserver
+/*/*/build
+build
 /*/*/production
 *.iml
 *.iws
