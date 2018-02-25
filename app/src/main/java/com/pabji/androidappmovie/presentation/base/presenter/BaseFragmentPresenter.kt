@@ -1,5 +1,18 @@
 package com.pabji.androidappmovie.presentation.base.presenter
 
-/**
- * Created by PabloJC on 25/2/18.
- */
+import com.pabji.androidappmovie.presentation.base.view.BaseFragmentView
+
+
+open class BaseFragmentPresenter<V : BaseFragmentView> : BasePresenter<V> {
+
+    protected var mView: V? = null
+
+    override fun attachView(view: V) {
+        mView = view
+    }
+
+
+    override fun detachView() {
+        mView = null
+    }
+}

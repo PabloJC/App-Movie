@@ -1,4 +1,4 @@
-package com.pabji.androidappmovie.domain.interactors.base
+package com.pabji.androidappmovie.domain.base
 
 import io.reactivex.Observable
 import io.reactivex.Observer
@@ -10,10 +10,12 @@ abstract class BaseInteractor<T>{
     protected open var observable : Observable<T>? = null
 
     fun runObserver(observer : Observer<T>) {
-        observable?.let {
-            it.subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(observer)
-        }
+        observable
+                ?.subscribeOn(Schedulers.newThread())
+                ?.observeOn(AndroidSchedulers.mainThread())
+                ?.subscribe(observer)
+                ?: run {
+                    observer.onError(Throwable("Observable not exist"))
+                }
     }
 }

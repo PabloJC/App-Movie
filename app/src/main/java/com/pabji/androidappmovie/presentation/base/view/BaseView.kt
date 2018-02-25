@@ -1,7 +1,6 @@
-package com.pabji.androidappmovie.presentation.ui.base.view;
+package com.pabji.androidappmovie.presentation.base.view;
 
 import android.support.v7.app.AppCompatActivity;
-
 
 interface BaseView {
 

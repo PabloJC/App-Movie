@@ -1,4 +1,4 @@
-package com.pabji.androidappmovie.data.net.models
+package com.pabji.androidappmovie.domain.models
 
 import com.pabji.androidappmovie.data.net.entities.GenreEntity
 

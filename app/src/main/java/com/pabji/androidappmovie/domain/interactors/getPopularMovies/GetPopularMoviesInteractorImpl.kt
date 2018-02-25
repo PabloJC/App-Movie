@@ -1,27 +1,24 @@
-package com.mibaldi.cah.domain.interactors.main
+package com.pabji.androidappmovie.domain.interactors.getPopularMovies
 
 import android.util.Log
-import com.mibaldi.cah.data.models.uimodels.Game
-import com.mibaldi.cah.data.repositories.GameRepository
-import com.mibaldi.cah.data.repositories.UserRepository
 import com.pabji.androidappmovie.data.net.entities.SearchEntity
-import com.pabji.androidappmovie.data.net.extensions.toModelList
-import com.pabji.androidappmovie.data.net.models.MoviePreview
-import com.pabji.androidappmovie.data.net.repositories.MovieRepository
-import com.pabji.androidappmovie.domain.interactors.GetPopularMoviesInteractor
-import com.pabji.androidappmovie.domain.interactors.base.BaseInteractor
+import com.pabji.androidappmovie.data.extensions.toModelList
+import com.pabji.androidappmovie.domain.models.MoviePreview
+import com.pabji.androidappmovie.data.repositories.MovieRepository
+import com.pabji.androidappmovie.domain.base.BaseInteractor
+import com.pabji.androidappmovie.domain.callbacks.ResultCallback
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
 
-class GetPopularMoviesInteractorImpl(val movieRepository: MovieRepository) : BaseInteractor<SearchEntity>(),GetPopularMoviesInteractor {
+class GetPopularMoviesInteractorImpl(val movieRepository: MovieRepository) : BaseInteractor<SearchEntity>(), GetPopularMoviesInteractor {
 
-    override fun execute(page: Int?, language: String?, callback: (List<MoviePreview>) -> Unit) {
-        observable = movieRepository.searchPopularMovies(page,language)
+    override fun execute(page: Int?, callback: ResultCallback<List<MoviePreview>>) {
+        observable = movieRepository.searchPopularMovies(page)
         val observer  = object : Observer<SearchEntity> {
             override fun onNext(entity: SearchEntity) {
                 entity.results?.let{
-                    callback(it.toModelList())
+                    callback.success(it.toModelList())
                 }
             }
 
@@ -30,12 +27,10 @@ class GetPopularMoviesInteractorImpl(val movieRepository: MovieRepository) : Bas
             }
 
             override fun onError(e: Throwable) {
-                Log.d("Subscriber",e.message)
+                callback.error(e)
             }
 
-            override fun onComplete() {
-
-            }
+            override fun onComplete() {}
         }
         runObserver(observer)
     }

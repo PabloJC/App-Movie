@@ -1,12 +1,35 @@
-package com.pabji.androidappmovie.presentation.ui.main.presenters.fragments
+package com.pabji.androidappmovie.presentation.ui.presenters.main
 
+import android.util.Log
+import com.pabji.androidappmovie.domain.callbacks.ResultCallback
+import com.pabji.androidappmovie.domain.interactors.getPopularMovies.GetPopularMoviesInteractor
+import com.pabji.androidappmovie.domain.models.MoviePreview
 import com.pabji.androidappmovie.presentation.base.presenter.BaseFragmentPresenter
-import com.pabji.androidappmovie.presentation.ui.main.views.fragments.PopularListContract
+import com.pabji.androidappmovie.presentation.ui.fragments.main.PopularListContract
 import javax.inject.Inject
 
-class PopularListPresenter @Inject constructor(): BaseFragmentPresenter<PopularListContract.View>(), PopularListContract.Presenter {
+class PopularListPresenter @Inject constructor(val getPopularMoviesInteractor : GetPopularMoviesInteractor): BaseFragmentPresenter<PopularListContract.View>(), PopularListContract.Presenter {
 
     override fun initialize() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mView?.resetList()
+        getPage()
+    }
+
+    fun getPage(page : Int = 1){
+        getPopularMoviesInteractor.execute(page,object : ResultCallback<List<MoviePreview>> {
+
+            override fun success(result: List<MoviePreview>) {
+                mView?.showMovieList(result)
+            }
+
+            override fun error(error: Throwable) {
+                Log.d("ERROR",error.localizedMessage)
+            }
+
+        })
+    }
+
+    fun openDetail() {
+
     }
 }

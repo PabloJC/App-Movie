@@ -1,12 +1,11 @@
-package com.pabji.androidappmovie.presentation.ui.main.presenters.fragments
+package com.pabji.androidappmovie.presentation.ui.presenters.main
 
 import com.pabji.androidappmovie.presentation.base.presenter.BaseFragmentPresenter
-import com.pabji.androidappmovie.presentation.ui.main.views.fragments.FavoriteListContract
+import com.pabji.androidappmovie.presentation.ui.fragments.main.FavoriteListContract
 import javax.inject.Inject
 
 class FavoriteListPresenter @Inject constructor(): BaseFragmentPresenter<FavoriteListContract.View>(), FavoriteListContract.Presenter {
 
     override fun initialize() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

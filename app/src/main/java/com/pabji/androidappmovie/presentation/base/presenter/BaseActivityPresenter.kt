@@ -1,7 +1,6 @@
-package com.pabji.androidappmovie.presentation.ui.base.presenter
+package com.pabji.androidappmovie.presentation.base.presenter
 
-import com.pabji.androidappmovie.presentation.ui.base.view.BaseView
-
+import com.pabji.androidappmovie.presentation.base.view.BaseView
 
 open class BaseActivityPresenter < V : BaseView> : BasePresenter<V> {
 

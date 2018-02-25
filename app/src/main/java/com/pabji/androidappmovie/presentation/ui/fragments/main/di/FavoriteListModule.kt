@@ -1,9 +1,7 @@
-package com.pabji.androidappmovie.presentation.ui.main.views.fragments.di
+package com.pabji.androidappmovie.presentation.ui.fragments.main.di
 
-import com.pabji.androidappmovie.presentation.ui.main.presenters.fragments.FavoriteListPresenter
-import com.pabji.androidappmovie.presentation.ui.main.presenters.fragments.PopularListPresenter
-import com.pabji.androidappmovie.presentation.ui.main.views.fragments.FavoriteListFragment
-import com.pabji.androidappmovie.presentation.ui.main.views.fragments.PopularListFragment
+import com.pabji.androidappmovie.presentation.ui.fragments.main.FavoriteListFragment
+import com.pabji.androidappmovie.presentation.ui.presenters.main.FavoriteListPresenter
 import dagger.Module
 import dagger.Provides
 

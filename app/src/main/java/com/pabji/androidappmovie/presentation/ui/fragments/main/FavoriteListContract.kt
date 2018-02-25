@@ -1,4 +1,4 @@
-package com.pabji.androidappmovie.presentation.ui.main.views.fragments
+package com.pabji.androidappmovie.presentation.ui.fragments.main
 
 import com.pabji.androidappmovie.presentation.base.presenter.BasePresenter
 import com.pabji.androidappmovie.presentation.base.view.BaseFragmentView

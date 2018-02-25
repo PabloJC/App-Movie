@@ -1,5 +1,7 @@
 package com.pabji.androidappmovie.domain.callbacks
 
-/**
- * Created by PabloJC on 25/2/18.
- */
+interface ResultCallback<in T> {
+
+    fun success(result: T)
+    fun error(error: Throwable)
+}

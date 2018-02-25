@@ -1,8 +1,8 @@
-package com.pabji.androidappmovie.presentation.ui.base.view
+package com.pabji.androidappmovie.presentation.base.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.pabji.androidappmovie.presentation.ui.base.presenter.BasePresenter
+import com.pabji.androidappmovie.presentation.base.presenter.BasePresenter
 import dagger.android.support.DaggerAppCompatActivity
 
 @Suppress("UNCHECKED_CAST")

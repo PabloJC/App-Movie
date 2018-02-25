@@ -1,7 +1,10 @@
-package com.pabji.androidappmovie.presentation.ui.main.views.fragments.di
+package com.pabji.androidappmovie.presentation.ui.fragments.main.di
 
-import com.pabji.androidappmovie.presentation.ui.main.presenters.fragments.PopularListPresenter
-import com.pabji.androidappmovie.presentation.ui.main.views.fragments.PopularListFragment
+import com.pabji.androidappmovie.data.repositories.MovieRepository
+import com.pabji.androidappmovie.domain.interactors.getPopularMovies.GetPopularMoviesInteractor
+import com.pabji.androidappmovie.domain.interactors.getPopularMovies.GetPopularMoviesInteractorImpl
+import com.pabji.androidappmovie.presentation.ui.fragments.main.PopularListFragment
+import com.pabji.androidappmovie.presentation.ui.presenters.main.PopularListPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -19,8 +22,14 @@ abstract class PopularListModule {
 
         @JvmStatic
         @Provides
-        fun providePopularListPresenter(): PopularListPresenter {
-            return PopularListPresenter()
+        internal fun provideGetPopularMoviesInteractor(movieRepository: MovieRepository): GetPopularMoviesInteractor {
+            return GetPopularMoviesInteractorImpl(movieRepository)
+        }
+
+        @JvmStatic
+        @Provides
+        fun providePopularListPresenter(getPopularMoviesInteractor: GetPopularMoviesInteractor): PopularListPresenter {
+            return PopularListPresenter(getPopularMoviesInteractor)
         }
     }
 
