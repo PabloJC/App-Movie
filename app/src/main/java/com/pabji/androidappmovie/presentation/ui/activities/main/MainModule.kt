@@ -1,6 +1,6 @@
 package com.pabji.androidappmovie.presentation.ui.main
 
-import com.pabji.androidappmovie.presentation.ui.main.presenter.MainPresenter
+import com.pabji.androidappmovie.presentation.ui.main.presenters.MainPresenter
 import dagger.Module
 import dagger.Provides
 
