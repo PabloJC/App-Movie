@@ -1,7 +1,8 @@
-package com.pabji.androidappmovie
+package com.pabji.androidappmovie.presentation.ui.main.view
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.pabji.androidappmovie.R
 
 class MainActivity : AppCompatActivity() {
 
