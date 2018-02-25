@@ -1,5 +1,6 @@
 package com.pabji.androidappmovie.application
 
+import com.pabji.androidappmovie.application.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 
