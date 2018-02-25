@@ -3,12 +3,13 @@ package com.pabji.androidappmovie.presentation.ui.presenters.main
 import android.util.Log
 import com.pabji.androidappmovie.domain.callbacks.ResultCallback
 import com.pabji.androidappmovie.domain.interactors.getPopularMovies.GetPopularMoviesInteractor
+import com.pabji.androidappmovie.domain.interactors.getPopularMovies.SaveFavoriteMovieInteractor
 import com.pabji.androidappmovie.domain.models.MoviePreview
 import com.pabji.androidappmovie.presentation.base.presenter.BaseFragmentPresenter
 import com.pabji.androidappmovie.presentation.ui.fragments.main.PopularListContract
 import javax.inject.Inject
 
-class PopularListPresenter @Inject constructor(val getPopularMoviesInteractor : GetPopularMoviesInteractor): BaseFragmentPresenter<PopularListContract.View>(), PopularListContract.Presenter {
+class PopularListPresenter @Inject constructor(val getPopularMoviesInteractor : GetPopularMoviesInteractor,val saveFavoriteMovieInteractor: SaveFavoriteMovieInteractor): BaseFragmentPresenter<PopularListContract.View>(), PopularListContract.Presenter {
 
     override fun initialize() {
         mView?.resetList()
@@ -29,7 +30,19 @@ class PopularListPresenter @Inject constructor(val getPopularMoviesInteractor : 
         })
     }
 
-    fun openDetail() {
+    fun openDetail(moviePreview: MoviePreview) {
+        saveFavoriteMovieInteractor.execute(moviePreview,object : ResultCallback<Boolean> {
 
+            override fun success(result: Boolean) {
+                if(result){
+                    mView?.showSaved()
+                }
+            }
+
+            override fun error(error: Throwable) {
+                Log.d("ERROR",error.localizedMessage)
+            }
+
+        })
     }
 }

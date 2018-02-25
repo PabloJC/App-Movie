@@ -11,3 +11,5 @@ fun List<MovieRoomEntity>.roomEntityListToModelList() : List<MoviePreview> = thi
 fun MoviePreviewEntity.previewEntityToModel() : MoviePreview = MoviePreview(id, voteAverage, title, popularity, posterPath, adult, releaseDate)
 
 fun MovieRoomEntity.roomEntityToModel() : MoviePreview = MoviePreview(id, voteAverage, title, popularity, posterPath, adult, releaseDate)
+
+fun MoviePreview.modelToRoomEntity() : MovieRoomEntity = MovieRoomEntity(null,null,null,null,id,null,null,null,null,popularity,posterPath,releaseDate,null,title,voteAverage,null)

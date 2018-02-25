@@ -8,6 +8,7 @@ interface PopularListContract {
     interface View : BaseFragmentView {
         fun showMovieList(list: List<MoviePreview>)
         fun resetList()
+        fun showSaved()
     }
 
     interface Presenter : BasePresenter<View> {

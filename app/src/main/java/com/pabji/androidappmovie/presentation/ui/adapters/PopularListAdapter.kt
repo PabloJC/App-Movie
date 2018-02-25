@@ -9,7 +9,7 @@ import com.pabji.androidappmovie.R
 import com.pabji.androidappmovie.domain.models.MoviePreview
 import kotlinx.android.synthetic.main.item_main_list.view.*
 
-class MainListAdapter(val callback: () -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PopularListAdapter(val callback: (MoviePreview) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var mList : MutableList<MoviePreview> = mutableListOf()
 
@@ -28,7 +28,7 @@ class MainListAdapter(val callback: () -> Unit) : RecyclerView.Adapter<RecyclerV
         notifyDataSetChanged()
     }
 
-    class ItemListHolder(itemView: View, callback: () -> Unit): RecyclerView.ViewHolder(itemView) {
+    class ItemListHolder(itemView: View, val callback: (MoviePreview) -> Unit): RecyclerView.ViewHolder(itemView) {
 
         fun bindItem(item: MoviePreview){
             itemView.tv_title.text = item.title
@@ -36,6 +36,7 @@ class MainListAdapter(val callback: () -> Unit) : RecyclerView.Adapter<RecyclerV
                     .load("http://image.tmdb.org/t/p/w185/"+item.posterPath)
                     .centerCrop()
                     .into(itemView.iv_image)
+            itemView.setOnClickListener { callback(item) }
         }
     }
 

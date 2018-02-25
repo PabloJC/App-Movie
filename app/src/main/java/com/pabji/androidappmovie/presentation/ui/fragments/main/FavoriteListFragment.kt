@@ -13,8 +13,8 @@ import com.pabji.androidappmovie.domain.models.MoviePreview
 import com.pabji.androidappmovie.presentation.base.view.BaseFragment
 import com.pabji.androidappmovie.presentation.ui.presenters.main.FavoriteListPresenter
 import com.pabji.androidappmovie.presentation.ui.activities.main.MainActivity
-import com.pabji.androidappmovie.presentation.ui.adapters.MainListAdapter
-import com.pabji.androidappmovie.presentation.ui.presenters.main.PopularListPresenter
+import com.pabji.androidappmovie.presentation.ui.adapters.FavoriteListAdapter
+import com.pabji.androidappmovie.presentation.ui.adapters.PopularListAdapter
 import kotlinx.android.synthetic.main.fragment_popular_list.*
 import javax.inject.Inject
 
@@ -23,11 +23,11 @@ class FavoriteListFragment: BaseFragment<FavoriteListContract.View, FavoriteList
     @Inject
     override lateinit var mPresenter : FavoriteListPresenter
 
-    lateinit var adapter: MainListAdapter
+    lateinit var adapter: FavoriteListAdapter
 
     companion object {
-        fun newInstance (): PopularListFragment {
-            return PopularListFragment()
+        fun newInstance (): FavoriteListFragment {
+            return FavoriteListFragment()
         }
     }
 
@@ -46,9 +46,16 @@ class FavoriteListFragment: BaseFragment<FavoriteListContract.View, FavoriteList
             mPresenter.initialize()
         }
 
-        rv_popularList.layoutManager = LinearLayoutManager(activity)
+        val orientation = activity.resources.configuration.orientation
 
-        adapter = MainListAdapter{
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            rv_popularList.layoutManager = GridLayoutManager(getMyActivity(),2)
+        }else{
+            rv_popularList.layoutManager = LinearLayoutManager(activity)
+        }
+
+
+        adapter = FavoriteListAdapter {
             mPresenter.openDetail()
         }
         rv_popularList.adapter = adapter
