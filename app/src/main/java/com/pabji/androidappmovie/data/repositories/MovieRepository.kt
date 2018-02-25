@@ -9,7 +9,7 @@ import javax.inject.Singleton
 @Singleton
 class MovieRepository @Inject constructor() {
 
-    val apiClient by lazy {
+    private val apiClient by lazy {
         ApiClient.create()
     }
 

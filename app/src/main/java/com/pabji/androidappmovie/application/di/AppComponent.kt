@@ -2,6 +2,7 @@ package com.pabji.androidappmovie.application.di
 
 import android.app.Application
 import com.pabji.androidappmovie.application.App
+import com.pabji.androidappmovie.data.persistence.PersistenceModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -12,6 +13,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(
         AppModule::class,
+        PersistenceModule::class,
         ActivityBuilder::class,
         AndroidSupportInjectionModule::class))
 

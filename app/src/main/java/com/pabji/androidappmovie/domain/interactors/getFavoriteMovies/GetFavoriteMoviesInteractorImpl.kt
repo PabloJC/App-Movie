@@ -1,25 +1,25 @@
 package com.pabji.androidappmovie.domain.interactors.getPopularMovies
 
 import android.util.Log
-import com.pabji.androidappmovie.data.net.entities.SearchEntity
 import com.pabji.androidappmovie.data.extensions.previewEntityListToModelList
+import com.pabji.androidappmovie.data.extensions.roomEntityListToModelList
+import com.pabji.androidappmovie.data.persistence.entities.MovieRoomEntity
+import com.pabji.androidappmovie.data.persistence.room.MovieDao
 import com.pabji.androidappmovie.domain.models.MoviePreview
-import com.pabji.androidappmovie.data.repositories.MovieRepository
 import com.pabji.androidappmovie.domain.base.BaseInteractor
 import com.pabji.androidappmovie.domain.callbacks.ResultCallback
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
 
-class GetPopularMoviesInteractorImpl(val movieRepository: MovieRepository) : BaseInteractor<SearchEntity>(), GetPopularMoviesInteractor {
+class GetFavoriteMoviesInteractorImpl(val movieDao: MovieDao) : BaseInteractor<List<MovieRoomEntity>>(), GetFavoriteMoviesInteractor {
 
-    override fun execute(page: Int?, callback: ResultCallback<List<MoviePreview>>) {
-        observable = movieRepository.searchPopularMovies(page)
-        val observer  = object : Observer<SearchEntity> {
-            override fun onNext(entity: SearchEntity) {
-                entity.results?.let{
-                    callback.success(it.previewEntityListToModelList())
-                }
+    override fun execute(callback: ResultCallback<List<MoviePreview>>) {
+
+        observable = movieDao.getFavoriteMovies().toObservable()
+        val observer  = object : Observer<List<MovieRoomEntity>> {
+            override fun onNext(result: List<MovieRoomEntity>) {
+                callback.success(result.roomEntityListToModelList())
             }
 
             override fun onSubscribe(d: Disposable) {

@@ -1,8 +1,13 @@
 package com.pabji.androidappmovie.data.extensions
 
 import com.pabji.androidappmovie.data.net.entities.MoviePreviewEntity
+import com.pabji.androidappmovie.data.persistence.entities.MovieRoomEntity
 import com.pabji.androidappmovie.domain.models.MoviePreview
 
-fun List<MoviePreviewEntity>.toModelList() : List<MoviePreview> = this.map {
-    MoviePreview(it.id, it.voteAverage, it.title, it.popularity, it.posterPath, it.adult, it.releaseDate)
-}
+fun List<MoviePreviewEntity>.previewEntityListToModelList() : List<MoviePreview> = this.map { it.previewEntityToModel() }
+
+fun List<MovieRoomEntity>.roomEntityListToModelList() : List<MoviePreview> = this.map { it.roomEntityToModel() }
+
+fun MoviePreviewEntity.previewEntityToModel() : MoviePreview = MoviePreview(id, voteAverage, title, popularity, posterPath, adult, releaseDate)
+
+fun MovieRoomEntity.roomEntityToModel() : MoviePreview = MoviePreview(id, voteAverage, title, popularity, posterPath, adult, releaseDate)
