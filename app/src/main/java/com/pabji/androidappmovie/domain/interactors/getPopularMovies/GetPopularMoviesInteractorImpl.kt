@@ -2,11 +2,13 @@ package com.pabji.androidappmovie.domain.interactors.getPopularMovies
 
 import android.util.Log
 import com.pabji.androidappmovie.data.net.entities.SearchEntity
-import com.pabji.androidappmovie.data.extensions.previewEntityListToModelList
+import com.pabji.androidappmovie.domain.extensions.previewEntityListToModelList
 import com.pabji.androidappmovie.domain.models.MoviePreview
 import com.pabji.androidappmovie.data.repositories.MovieRepository
 import com.pabji.androidappmovie.domain.base.BaseInteractor
 import com.pabji.androidappmovie.domain.callbacks.ResultCallback
+import com.pabji.androidappmovie.domain.interactors.getMovieDetail.GetMovieDetailInteractor
+import com.pabji.androidappmovie.domain.models.Movie
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 

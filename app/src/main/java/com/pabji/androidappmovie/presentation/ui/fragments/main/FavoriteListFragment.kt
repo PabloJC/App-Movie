@@ -1,5 +1,6 @@
 package com.pabji.androidappmovie.presentation.ui.fragments.main
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import com.pabji.androidappmovie.R
 import com.pabji.androidappmovie.domain.models.MoviePreview
 import com.pabji.androidappmovie.presentation.base.view.BaseFragment
+import com.pabji.androidappmovie.presentation.ui.activities.detail.DetailActivity
 import com.pabji.androidappmovie.presentation.ui.presenters.main.FavoriteListPresenter
 import com.pabji.androidappmovie.presentation.ui.activities.main.MainActivity
 import com.pabji.androidappmovie.presentation.ui.adapters.FavoriteListAdapter
@@ -55,9 +57,14 @@ class FavoriteListFragment: BaseFragment<FavoriteListContract.View, FavoriteList
         }
 
 
-        adapter = FavoriteListAdapter {
-            mPresenter.openDetail()
+        adapter = FavoriteListAdapter { item ->
+            run {
+                val intent = Intent(activity, DetailActivity::class.java)
+                intent.putExtra("movieId", item.id)
+                startActivity(intent)
+            }
         }
+
         rv_popularList.adapter = adapter
     }
 

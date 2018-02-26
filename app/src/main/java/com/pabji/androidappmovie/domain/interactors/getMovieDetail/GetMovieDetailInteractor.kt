@@ -1,10 +1,10 @@
-package com.pabji.androidappmovie.domain.interactors.getPopularMovies
+package com.pabji.androidappmovie.domain.interactors.getMovieDetail
 
 import com.pabji.androidappmovie.domain.callbacks.ResultCallback
 import com.pabji.androidappmovie.domain.models.Movie
 import com.pabji.androidappmovie.domain.models.MoviePreview
 
-interface SaveFavoriteMovieInteractor {
+interface GetMovieDetailInteractor {
 
-    fun execute(movie: Movie,callback: ResultCallback<Boolean>)
+    fun execute(idMovie : Int,callback: ResultCallback<Movie>)
 }

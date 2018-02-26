@@ -1,11 +1,9 @@
 package com.pabji.androidappmovie.presentation.ui.fragments.main.di
 
 import com.pabji.androidappmovie.data.persistence.room.MovieDao
-import com.pabji.androidappmovie.data.repositories.MovieRepository
-import com.pabji.androidappmovie.domain.interactors.getPopularMovies.GetFavoriteMoviesInteractor
-import com.pabji.androidappmovie.domain.interactors.getPopularMovies.GetFavoriteMoviesInteractorImpl
-import com.pabji.androidappmovie.domain.interactors.getPopularMovies.GetPopularMoviesInteractor
-import com.pabji.androidappmovie.domain.interactors.getPopularMovies.GetPopularMoviesInteractorImpl
+import com.pabji.androidappmovie.domain.interactors.getFavoriteMovies.GetFavoriteMoviesInteractor
+import com.pabji.androidappmovie.domain.interactors.getFavoriteMovies.GetFavoriteMoviesInteractorImpl
+import com.pabji.androidappmovie.domain.interactors.getFavoriteMovies.IsFavoriteMovieInteractorImpl
 import com.pabji.androidappmovie.presentation.ui.fragments.main.FavoriteListFragment
 import com.pabji.androidappmovie.presentation.ui.presenters.main.FavoriteListPresenter
 import dagger.Module

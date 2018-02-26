@@ -1,4 +1,4 @@
-package com.pabji.androidappmovie.domain.interactors.getPopularMovies
+package com.pabji.androidappmovie.domain.interactors.getFavoriteMovies
 
 import com.pabji.androidappmovie.domain.callbacks.ResultCallback
 import com.pabji.androidappmovie.domain.models.MoviePreview

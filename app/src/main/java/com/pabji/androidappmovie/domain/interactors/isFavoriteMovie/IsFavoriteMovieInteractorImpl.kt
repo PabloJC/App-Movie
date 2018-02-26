@@ -1,24 +1,23 @@
 package com.pabji.androidappmovie.domain.interactors.getFavoriteMovies
 
 import android.util.Log
-import com.pabji.androidappmovie.domain.extensions.roomEntityListToModelList
 import com.pabji.androidappmovie.data.persistence.entities.MovieRoomEntity
 import com.pabji.androidappmovie.data.persistence.room.MovieDao
-import com.pabji.androidappmovie.domain.models.MoviePreview
 import com.pabji.androidappmovie.domain.base.BaseInteractor
 import com.pabji.androidappmovie.domain.callbacks.ResultCallback
+import com.pabji.androidappmovie.domain.interactors.isFavoriteMovie.IsFavoriteMovieInteractor
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 
 
-class GetFavoriteMoviesInteractorImpl(val movieDao: MovieDao) : BaseInteractor<List<MovieRoomEntity>>(), GetFavoriteMoviesInteractor {
+class IsFavoriteMovieInteractorImpl(val movieDao: MovieDao) : BaseInteractor<MovieRoomEntity>(), IsFavoriteMovieInteractor {
 
-    override fun execute(callback: ResultCallback<List<MoviePreview>>) {
+    override fun execute(movieId : Int,callback: ResultCallback<Boolean>) {
 
-        observable = movieDao.getFavoriteMovies().toObservable()
-        val observer  = object : Observer<List<MovieRoomEntity>> {
-            override fun onNext(result: List<MovieRoomEntity>) {
-                callback.success(result.roomEntityListToModelList())
+        observable = movieDao.getFavorite(movieId).toObservable()
+        val observer  = object : Observer<MovieRoomEntity> {
+            override fun onNext(result: MovieRoomEntity) {
+                callback.success(true)
             }
 
             override fun onSubscribe(d: Disposable) {

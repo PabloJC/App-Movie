@@ -2,6 +2,7 @@ package com.pabji.androidappmovie.presentation.ui.fragments.main.di
 
 import com.pabji.androidappmovie.data.persistence.room.MovieDao
 import com.pabji.androidappmovie.data.repositories.MovieRepository
+import com.pabji.androidappmovie.domain.interactors.getMovieDetail.GetMovieDetailInteractor
 import com.pabji.androidappmovie.domain.interactors.getPopularMovies.GetPopularMoviesInteractor
 import com.pabji.androidappmovie.domain.interactors.getPopularMovies.GetPopularMoviesInteractorImpl
 import com.pabji.androidappmovie.domain.interactors.getPopularMovies.SaveFavoriteMovieInteractor
@@ -31,14 +32,8 @@ abstract class PopularListModule {
 
         @JvmStatic
         @Provides
-        internal fun provideSaveFavoriteMovieInteractor(dao: MovieDao): SaveFavoriteMovieInteractor {
-            return SaveFavoriteMovieInteractorImpl(dao)
-        }
-
-        @JvmStatic
-        @Provides
-        fun providePopularListPresenter(getPopularMoviesInteractor: GetPopularMoviesInteractor, saveFavoriteMovieInteractor: SaveFavoriteMovieInteractor): PopularListPresenter {
-            return PopularListPresenter(getPopularMoviesInteractor, saveFavoriteMovieInteractor)
+        fun providePopularListPresenter(getPopularMoviesInteractor: GetPopularMoviesInteractor): PopularListPresenter {
+            return PopularListPresenter(getPopularMoviesInteractor)
         }
     }
 

@@ -9,18 +9,21 @@ import com.pabji.androidappmovie.presentation.base.presenter.BaseFragmentPresent
 import com.pabji.androidappmovie.presentation.ui.fragments.main.PopularListContract
 import javax.inject.Inject
 
-class PopularListPresenter @Inject constructor(val getPopularMoviesInteractor : GetPopularMoviesInteractor,val saveFavoriteMovieInteractor: SaveFavoriteMovieInteractor): BaseFragmentPresenter<PopularListContract.View>(), PopularListContract.Presenter {
+class PopularListPresenter @Inject constructor(val getPopularMoviesInteractor: GetPopularMoviesInteractor): BaseFragmentPresenter<PopularListContract.View>(), PopularListContract.Presenter {
 
+    var page : Int = 0
     override fun initialize() {
         mView?.resetList()
+        page = 1
         getPage()
     }
 
-    fun getPage(page : Int = 1){
+    fun getPage(){
         getPopularMoviesInteractor.execute(page,object : ResultCallback<List<MoviePreview>> {
 
             override fun success(result: List<MoviePreview>) {
                 mView?.showMovieList(result)
+                page++
             }
 
             override fun error(error: Throwable) {
@@ -30,19 +33,9 @@ class PopularListPresenter @Inject constructor(val getPopularMoviesInteractor : 
         })
     }
 
-    fun openDetail(moviePreview: MoviePreview) {
-        saveFavoriteMovieInteractor.execute(moviePreview,object : ResultCallback<Boolean> {
-
-            override fun success(result: Boolean) {
-                if(result){
-                    mView?.showSaved()
-                }
-            }
-
-            override fun error(error: Throwable) {
-                Log.d("ERROR",error.localizedMessage)
-            }
-
-        })
+    override fun getNextPage() {
+        mView?.showLoading()
+        getPage()
     }
+
 }

@@ -2,8 +2,7 @@ package com.pabji.androidappmovie.presentation.ui.presenters.main
 
 import android.util.Log
 import com.pabji.androidappmovie.domain.callbacks.ResultCallback
-import com.pabji.androidappmovie.domain.interactors.getPopularMovies.GetFavoriteMoviesInteractor
-import com.pabji.androidappmovie.domain.interactors.getPopularMovies.GetPopularMoviesInteractor
+import com.pabji.androidappmovie.domain.interactors.getFavoriteMovies.GetFavoriteMoviesInteractor
 import com.pabji.androidappmovie.domain.models.MoviePreview
 import com.pabji.androidappmovie.presentation.base.presenter.BaseFragmentPresenter
 import com.pabji.androidappmovie.presentation.ui.fragments.main.FavoriteListContract

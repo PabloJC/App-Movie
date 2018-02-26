@@ -1,5 +1,6 @@
 package com.pabji.androidappmovie.data.repositories
 
+import com.pabji.androidappmovie.data.net.entities.MovieDetailEntity
 import com.pabji.androidappmovie.data.net.entities.SearchEntity
 import com.pabji.androidappmovie.data.net.retrofit.ApiClient
 import io.reactivex.Observable
@@ -14,6 +15,10 @@ class MovieRepository @Inject constructor() {
     }
 
     fun searchPopularMovies(page: Int?, language: String = "es") : Observable<SearchEntity>{
-        return apiClient.getTop(ApiClient.API_KEY,page,language)
+        return apiClient.getPopularMovies(ApiClient.API_KEY,page,language)
+    }
+
+    fun getMovieDetail(idMovie: Int,language: String = "es"): Observable<MovieDetailEntity>? {
+        return apiClient.getMovieDetail(idMovie,ApiClient.API_KEY,language)
     }
 }

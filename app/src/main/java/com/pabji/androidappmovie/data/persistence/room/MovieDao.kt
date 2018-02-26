@@ -6,6 +6,7 @@ import android.arch.persistence.room.OnConflictStrategy.REPLACE
 import android.arch.persistence.room.Query
 import com.pabji.androidappmovie.data.persistence.entities.MovieRoomEntity
 import io.reactivex.Flowable
+import io.reactivex.Observable
 
 @Dao
 interface MovieDao {
@@ -15,4 +16,7 @@ interface MovieDao {
 
     @Insert(onConflict = REPLACE)
     fun saveFavorite(movie: MovieRoomEntity)
+
+    @Query("select * from movie where id = :movieId LIMIT 1")
+    fun getFavorite(movieId: Int): Flowable<MovieRoomEntity>
 }

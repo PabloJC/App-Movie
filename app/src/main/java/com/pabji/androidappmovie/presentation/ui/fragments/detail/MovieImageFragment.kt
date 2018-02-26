@@ -10,30 +10,37 @@ import com.bumptech.glide.Glide
 import com.pabji.androidappmovie.R
 import com.pabji.androidappmovie.presentation.base.view.BaseFragment
 import com.pabji.androidappmovie.presentation.ui.activities.detail.DetailActivity
+import com.pabji.androidappmovie.presentation.ui.presenters.detail.MovieImagePresenter
+import com.pabji.androidappmovie.presentation.ui.presenters.detail.MovieInfoPresenter
 import kotlinx.android.synthetic.main.fragment_image_detail.*
 import kotlinx.android.synthetic.main.item_main_list.view.*
 import javax.inject.Inject
 
-class MovieImageFragment : Fragment(){
+class MovieImageFragment : BaseFragment<MovieImageContract.View, MovieImagePresenter>(), MovieImageContract.View {
 
+
+    @Inject
+    override lateinit var mPresenter : MovieImagePresenter
 
     companion object {
         fun newInstance (): MovieImageFragment {
-
-            val fragment = MovieImageFragment()
-            val args = Bundle()
-            args.putString("image","/7xQcmL6WWVJB8N0POzTqxXHf21Q.jpg")
-
-            fragment.setArguments(args)
-            return fragment
+            return MovieImageFragment()
         }
+    }
+
+    override fun getMyActivity(): AppCompatActivity {
+        return activity as DetailActivity
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val image = arguments.getString("image")
+
+        mPresenter.initialize(activity)
+    }
+
+    override fun showImage(image: String) {
         Glide.with(activity)
-                .load("http://image.tmdb.org/t/p/w185"+image)
+                .load("http://image.tmdb.org/t/p/w500"+image)
                 .centerCrop()
                 .into(iv_image)
     }

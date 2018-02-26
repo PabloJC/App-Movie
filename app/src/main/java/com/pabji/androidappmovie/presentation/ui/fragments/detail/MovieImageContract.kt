@@ -5,14 +5,10 @@ import com.pabji.androidappmovie.domain.models.Movie
 import com.pabji.androidappmovie.presentation.base.presenter.BasePresenter
 import com.pabji.androidappmovie.presentation.base.view.BaseFragmentView
 
-interface MovieInfoContract {
+interface MovieImageContract {
 
     interface View : BaseFragmentView {
-        fun showTitle(title: String?)
-        fun showData(movie: Movie)
-        fun showGenres(joinToString: String?)
-        fun showBudget(budget: String)
-        fun showDate(date: String)
+        fun showImage(it: String)
     }
 
     interface Presenter : BasePresenter<View> {

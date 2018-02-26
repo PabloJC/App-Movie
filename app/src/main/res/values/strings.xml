@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">AndroidAppMovie</string>
+    <string name="app_name">App Movie</string>
     <string name="tab_title_popular_movies">Películas Populares</string>
     <string name="tab_title_favorites_movies">Películas Favoritas</string>
+    <string name="saved_favorite">Guardada como favorito</string>
 </resources>

@@ -1,9 +1,11 @@
 package com.pabji.androidappmovie.presentation.ui.fragments.main
 
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
@@ -15,16 +17,9 @@ import com.pabji.androidappmovie.presentation.ui.presenters.main.PopularListPres
 import com.pabji.androidappmovie.presentation.ui.activities.main.MainActivity
 import com.pabji.androidappmovie.presentation.ui.adapters.PopularListAdapter
 import kotlinx.android.synthetic.main.fragment_popular_list.*
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.newTask
-import org.jetbrains.anko.support.v4.intentFor
-import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 class PopularListFragment: BaseFragment<PopularListContract.View, PopularListPresenter>(), PopularListContract.View {
-    override fun showSaved() {
-        toast("Guardado")
-    }
 
     @Inject
     override lateinit var mPresenter : PopularListPresenter
@@ -58,11 +53,28 @@ class PopularListFragment: BaseFragment<PopularListContract.View, PopularListPre
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             spanCount = 4
         }
-        rv_popularList.layoutManager = GridLayoutManager(getMyActivity(),spanCount)
 
+        val layoutManager = GridLayoutManager(getMyActivity(),spanCount)
 
-        adapter = PopularListAdapter {
-            item -> startActivity(intentFor<DetailActivity>().newTask())
+        rv_popularList.layoutManager = layoutManager
+
+        rv_popularList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                if (swipe_layout.isRefreshing)
+                    return
+                val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
+                if (pastVisibleItems + layoutManager.childCount >= layoutManager.itemCount) {
+                    mPresenter.getPage()
+                }
+            }
+        })
+
+        adapter = PopularListAdapter { item ->
+            run {
+                val intent = Intent(activity, DetailActivity::class.java)
+                intent.putExtra("movieId", item.id)
+                startActivity(intent)
+            }
         }
         rv_popularList.adapter = adapter
     }
@@ -73,6 +85,10 @@ class PopularListFragment: BaseFragment<PopularListContract.View, PopularListPre
 
     override fun resetList() {
         adapter.clearList()
+        swipe_layout.isRefreshing = true
+    }
+
+    override fun showLoading() {
         swipe_layout.isRefreshing = true
     }
 
