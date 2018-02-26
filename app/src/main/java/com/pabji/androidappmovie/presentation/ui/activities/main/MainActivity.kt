@@ -25,6 +25,7 @@ class MainActivity : BaseActivity<MainContract.View, MainPresenter>(), MainContr
 
     private fun initView() {
         setSupportActionBar(toolbar)
+        toolbar?.setPadding(0, getStatusBarHeight(), 0, 0);
 
         tab_layout.addTab(tab_layout.newTab().setText(getString(R.string.tab_title_popular_movies)))
         tab_layout.addTab(tab_layout.newTab().setText(getString(R.string.tab_title_favorites_movies)))

@@ -27,6 +27,5 @@ class FavoriteListPresenter @Inject constructor(val getFavoriteMoviesInteractor 
     }
 
     override fun openDetail() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

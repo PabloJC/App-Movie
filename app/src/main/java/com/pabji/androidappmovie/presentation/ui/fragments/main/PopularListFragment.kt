@@ -10,10 +10,14 @@ import android.view.View
 import com.pabji.androidappmovie.R
 import com.pabji.androidappmovie.domain.models.MoviePreview
 import com.pabji.androidappmovie.presentation.base.view.BaseFragment
+import com.pabji.androidappmovie.presentation.ui.activities.detail.DetailActivity
 import com.pabji.androidappmovie.presentation.ui.presenters.main.PopularListPresenter
 import com.pabji.androidappmovie.presentation.ui.activities.main.MainActivity
 import com.pabji.androidappmovie.presentation.ui.adapters.PopularListAdapter
 import kotlinx.android.synthetic.main.fragment_popular_list.*
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.newTask
+import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
@@ -58,7 +62,7 @@ class PopularListFragment: BaseFragment<PopularListContract.View, PopularListPre
 
 
         adapter = PopularListAdapter {
-            item -> mPresenter.openDetail(item)
+            item -> startActivity(intentFor<DetailActivity>().newTask())
         }
         rv_popularList.adapter = adapter
     }
