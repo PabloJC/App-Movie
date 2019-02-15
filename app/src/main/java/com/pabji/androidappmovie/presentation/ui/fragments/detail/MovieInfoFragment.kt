@@ -34,9 +34,11 @@ class MovieInfoFragment: BaseFragment<MovieInfoContract.View, MovieInfoPresenter
         return activity as DetailActivity
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mPresenter.initialize(activity)
+        activity?.apply {
+            mPresenter.initialize(this)
+        }
     }
 
     override fun showData(movie: Movie) {

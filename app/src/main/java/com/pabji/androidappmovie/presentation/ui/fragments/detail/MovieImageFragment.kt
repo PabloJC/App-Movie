@@ -32,15 +32,16 @@ class MovieImageFragment : BaseFragment<MovieImageContract.View, MovieImagePrese
         return activity as DetailActivity
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        mPresenter.initialize(activity)
+        activity?.apply {
+            mPresenter.initialize(this)
+        }
     }
 
     override fun showImage(image: String) {
         Glide.with(activity)
-                .load("http://image.tmdb.org/t/p/w500"+image)
+                .load("http://image.tmdb.org/t/p/w500$image")
                 .centerCrop()
                 .into(iv_image)
     }

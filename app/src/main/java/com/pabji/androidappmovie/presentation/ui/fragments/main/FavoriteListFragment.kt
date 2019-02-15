@@ -37,7 +37,7 @@ class FavoriteListFragment: BaseFragment<FavoriteListContract.View, FavoriteList
         return activity as MainActivity
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
         mPresenter.initialize()
@@ -48,7 +48,7 @@ class FavoriteListFragment: BaseFragment<FavoriteListContract.View, FavoriteList
             mPresenter.initialize()
         }
 
-        val orientation = activity.resources.configuration.orientation
+        val orientation = activity?.resources?.configuration?.orientation
 
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             rv_popularList.layoutManager = GridLayoutManager(getMyActivity(),2)

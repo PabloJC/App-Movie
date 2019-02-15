@@ -36,7 +36,7 @@ class PopularListFragment: BaseFragment<PopularListContract.View, PopularListPre
         return activity as MainActivity
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
         mPresenter.initialize()
@@ -47,7 +47,7 @@ class PopularListFragment: BaseFragment<PopularListContract.View, PopularListPre
             mPresenter.initialize()
         }
 
-        val orientation = activity.resources.configuration.orientation
+        val orientation = activity?.resources?.configuration?.orientation
 
         var spanCount = 3
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -59,7 +59,7 @@ class PopularListFragment: BaseFragment<PopularListContract.View, PopularListPre
         rv_popularList.layoutManager = layoutManager
 
         rv_popularList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (swipe_layout.isRefreshing)
                     return
                 val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()

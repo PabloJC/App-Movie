@@ -17,10 +17,12 @@ class PopularListAdapter(val callback: (MoviePreview) -> Unit) : RecyclerView.Ad
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_main_list, parent, false)
         return ItemListHolder(view, callback)
     }
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder = holder as ItemListHolder
         viewHolder.bindItem(mList[position])
     }
+
     override fun getItemCount(): Int = mList.size
 
     fun addData(list: List<MoviePreview>){

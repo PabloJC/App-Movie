@@ -17,7 +17,8 @@ class FavoriteListAdapter(val callback: (MoviePreview) -> Unit) : RecyclerView.A
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_favorite_list, parent, false)
         return ItemListHolder(view, callback)
     }
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder = holder as ItemListHolder
         viewHolder.bindItem(mList[position])
     }

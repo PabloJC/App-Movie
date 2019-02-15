@@ -11,7 +11,7 @@ abstract class BaseFragment<V : BaseFragmentView, T : BaseFragmentPresenter<V>>
     : DaggerFragment(), BaseFragmentView {
 
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mPresenter.attachView(this as V )
     }

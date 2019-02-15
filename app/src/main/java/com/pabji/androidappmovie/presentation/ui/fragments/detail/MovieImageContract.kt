@@ -8,7 +8,7 @@ import com.pabji.androidappmovie.presentation.base.view.BaseFragmentView
 interface MovieImageContract {
 
     interface View : BaseFragmentView {
-        fun showImage(it: String)
+        fun showImage(image: String)
     }
 
     interface Presenter : BasePresenter<View> {
